@@ -19,6 +19,7 @@ const MovieSchema: Schema = new Schema(
     releaseDate: { Type: Date },
     duration: { Type: Number },
     rating: { Type: String },
+    showtimes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Showtime" }],
   },
   {
     timestamps: true,
