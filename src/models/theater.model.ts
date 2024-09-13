@@ -11,6 +11,7 @@ const TheaterSchema: Schema = new Schema(
     name: { type: String, required: true },
     location: { type: String },
     capacity: { type: Number },
+    showtimes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Showtime" }],
   },
   {
     timestamps: true,

@@ -13,6 +13,7 @@ const UserSchema: Schema = new Schema(
     email: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
     registeredAt: { type: Date, default: Date.now },
+    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
   },
   {
     timestamps: true,
