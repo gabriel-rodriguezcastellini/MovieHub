@@ -5,6 +5,7 @@ interface User extends Document {
   email: string;
   passwordHash: string;
   registeredAt: Date;
+  firebaseUid: string;
 }
 
 const UserSchema: Schema = new Schema(
@@ -14,6 +15,7 @@ const UserSchema: Schema = new Schema(
     passwordHash: { type: String, required: true },
     registeredAt: { type: Date, default: Date.now },
     tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
+    firebaseUid: { type: String },
   },
   {
     timestamps: true,
