@@ -4,6 +4,7 @@ interface Theater extends Document {
   name: string;
   location: string;
   capacity: number;
+  showtimes: string[];
 }
 
 const TheaterSchema: Schema = new Schema(

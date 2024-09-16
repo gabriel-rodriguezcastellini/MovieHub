@@ -1,8 +1,10 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface Ticket extends Document {
+  showtime: string;
   price: number;
   isPurchased: boolean;
+  user: string;
 }
 
 const TicketSchema: Schema = new Schema(

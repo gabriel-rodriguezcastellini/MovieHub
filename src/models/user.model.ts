@@ -1,21 +1,24 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface User extends Document {
-  username: string;
+  name: string;
+  lastName: string;
+  birthdate: Date;
   email: string;
-  passwordHash: string;
-  registeredAt: Date;
+  isAdmin: boolean;
   firebaseUid: string;
+  tickets: string[];
 }
 
 const UserSchema: Schema = new Schema(
   {
-    username: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    passwordHash: { type: String, required: true },
-    registeredAt: { type: Date, default: Date.now },
-    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
+    name: { type: String },
+    lastName: { type: String },
+    birthDate: { type: Date },
+    email: { type: String, unique: true },
+    isAdmin: { type: Boolean, default: false },
     firebaseUid: { type: String },
+    tickets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ticket" }],
   },
   {
     timestamps: true,

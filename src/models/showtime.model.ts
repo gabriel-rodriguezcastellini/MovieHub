@@ -2,6 +2,9 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface Showtime extends Document {
   startTime: Date;
+  movie: string;
+  theater: string;
+  tickets: string[];
 }
 
 const ShowtimeSchema: Schema = new Schema(
@@ -16,4 +19,4 @@ const ShowtimeSchema: Schema = new Schema(
   }
 );
 
-export const Category = mongoose.model<Showtime>("Showtime", ShowtimeSchema);
+export const Showtime = mongoose.model<Showtime>("Showtime", ShowtimeSchema);

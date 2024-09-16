@@ -8,6 +8,7 @@ interface Movie extends Document {
   releaseDate: Date;
   duration: number;
   rating: string;
+  showtimes: string[];
 }
 
 const MovieSchema: Schema = new Schema(
