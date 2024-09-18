@@ -30,12 +30,41 @@ export const createUser = async (
   }
 };
 
-export const getUsers = (req: Request, res: Response) => {
-  res.json({ message: "", data: {} });
+export const getUsers = (_req: Request, res: Response) => {
+  User.find()
+    .then((users) => {
+      res.status(200).json({
+        message: "Users retrieved successfully",
+        data: users,
+        error: false,
+      });
+    })
+    .catch(() => {
+      res.status(500).json({
+        message: "Error retrieving users",
+        error: true,
+      });
+    });
 };
 
-export const getUser = (req: Request, res: Response) => {
-  res.json({ message: "", data: {} });
+export const getUser = (_req: Request, res: Response) => {
+  User.findById(_req.params.id)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: "User not found", error: true });
+      }
+      return res.status(200).json({
+        message: "User retrieved successfully",
+        data: user,
+        error: false,
+      });
+    })
+    .catch(() => {
+      res.status(500).json({
+        message: "Error retrieving user",
+        error: true,
+      });
+    });
 };
 
 export const updateUser = async (
