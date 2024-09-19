@@ -27,4 +27,4 @@ const MovieSchema: Schema = new Schema(
   }
 );
 
-export const Category = mongoose.model<Movie>("Movie", MovieSchema);
+export const Movie = mongoose.model<Movie>("Movie", MovieSchema);
