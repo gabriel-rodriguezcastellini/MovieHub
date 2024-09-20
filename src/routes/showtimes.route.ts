@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   createShowtime,
   deleteShowtime,
@@ -6,6 +7,7 @@ import {
   getAllShowtimes,
   updateShowtime,
 } from "../controllers";
+
 import {
   validateCreateShowtime,
   validateDeleteShowtime,

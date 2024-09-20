@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   createMovie,
   deleteMovie,
@@ -6,6 +7,7 @@ import {
   getMovies,
   updateMovie,
 } from "../controllers";
+
 import {
   createMovieValidation,
   deleteMovieValidation,
