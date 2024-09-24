@@ -1,5 +1,7 @@
 # MovieHub
 
+[![CodeQL Advanced](https://github.com/gabriel-rodriguezcastellini/MovieHub/actions/workflows/codeql.yml/badge.svg)](https://github.com/gabriel-rodriguezcastellini/MovieHub/actions/workflows/codeql.yml)
+
 MovieHub is a comprehensive web application designed to streamline the movie viewing experience. It provides features for managing movies, showtimes, theaters, tickets, and users.
 
 ## Table of Contents
