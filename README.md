@@ -114,4 +114,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under the MIT License.
