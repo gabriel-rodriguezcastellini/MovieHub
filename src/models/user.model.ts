@@ -18,7 +18,6 @@ const UserSchema: Schema = new Schema(
     email: { type: String, unique: true },
     isAdmin: { type: Boolean, default: false },
     firebaseUid: { type: String },
-    tickets: [{ type: Array<mongoose.Schema.Types.ObjectId>, ref: "Ticket" }],
   },
   {
     timestamps: true,

@@ -14,9 +14,16 @@ const ShowtimeSchema: Schema = new Schema(
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
     price: { type: Number, required: true },
-    movieId: { type: mongoose.Schema.Types.ObjectId, ref: "Movie" },
-    screenId: { type: mongoose.Schema.Types.ObjectId, ref: "Screen" },
-    tickets: [{ type: Array<mongoose.Schema.Types.ObjectId>, ref: "Ticket" }],
+    movieId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Movie",
+      required: true,
+    },
+    screenId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Screen",
+      required: true,
+    },
   },
   {
     timestamps: true,

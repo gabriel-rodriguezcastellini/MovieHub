@@ -12,9 +12,6 @@ const ScreenSchema: Schema = new Schema(
     name: { type: String, required: true },
     location: { type: String },
     capacity: { type: Number },
-    showtimes: [
-      { type: Array<mongoose.Schema.Types.ObjectId>, ref: "Showtime" },
-    ],
   },
   {
     timestamps: true,
