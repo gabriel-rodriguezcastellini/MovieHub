@@ -1,13 +1,13 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface Theater extends Document {
+interface Screen extends Document {
   name: string;
   location: string;
   capacity: number;
   showtimes: string[];
 }
 
-const TheaterSchema: Schema = new Schema(
+const ScreenSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     location: { type: String },
@@ -21,4 +21,4 @@ const TheaterSchema: Schema = new Schema(
   }
 );
 
-export const Theater = mongoose.model<Theater>("Theater", TheaterSchema);
+export const Screen = mongoose.model<Screen>("Screen", ScreenSchema);

@@ -2,7 +2,7 @@
 
 [![CodeQL Advanced](https://github.com/gabriel-rodriguezcastellini/MovieHub/actions/workflows/codeql.yml/badge.svg)](https://github.com/gabriel-rodriguezcastellini/MovieHub/actions/workflows/codeql.yml)
 
-MovieHub is a comprehensive web application designed to streamline the movie viewing experience. It provides features for managing movies, showtimes, theaters, tickets, and users.
+MovieHub is a comprehensive web application designed to streamline the movie viewing experience. It provides features for managing movies, showtimes, screens, tickets, and users.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ MovieHub is a comprehensive web application designed to streamline the movie vie
 ## Features
 
 - User authentication and authorization using Firebase.
-- CRUD operations for movies, showtimes, theaters, tickets, and users.
+- CRUD operations for movies, showtimes, screens, tickets, and users.
 - Input validation using Joi.
 - MongoDB integration using Mongoose.
 
@@ -77,12 +77,12 @@ Once the application is running, you can access it at `http://localhost:3000`.
 - **PUT /showtimes/:id**: Update a showtime
 - **DELETE /showtimes/:id**: Delete a showtime
 
-### Theaters
+### Screens
 
-- **GET /theaters**: Get all theaters
-- **POST /theaters**: Create a new theater
-- **PUT /theaters/:id**: Update a theater
-- **DELETE /theaters/:id**: Delete a theater
+- **GET /screens**: Get all screens
+- **POST /screens**: Create a new screen
+- **PUT /screens/:id**: Update a screen
+- **DELETE /screens/:id**: Delete a screen
 
 ### Tickets
 

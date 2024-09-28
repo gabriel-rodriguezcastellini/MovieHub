@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Movie } from "../models";
+import mongoose from "mongoose";
 
 export const getMovies = async (
   _req: Request,
@@ -18,12 +19,28 @@ export const getMovieById = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const movie = await Movie.findById(req.params.id);
+    const movie = await Movie.aggregate([
+      {
+        $lookup: {
+          from: "showtimes",
+          localField: "_id",
+          foreignField: "movieId",
+          as: "showtimes",
+        },
+      },
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.params.id),
+        },
+      },
+    ]);
+
     if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
     return res.status(200).json(movie);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "Error fetching movie", error });
   }
 };

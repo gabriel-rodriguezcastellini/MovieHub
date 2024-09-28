@@ -3,7 +3,7 @@ import Joi from "joi";
 
 const createShowtimeSchema = Joi.object({
   movieId: Joi.string().required(),
-  theaterId: Joi.string().required(),
+  screenId: Joi.string().required(),
   startTime: Joi.date().iso().required(),
   endTime: Joi.date().iso().required(),
   price: Joi.number().positive().required(),
@@ -11,7 +11,7 @@ const createShowtimeSchema = Joi.object({
 
 const updateShowtimeSchema = Joi.object({
   movieId: Joi.string().optional(),
-  theaterId: Joi.string().optional(),
+  screenId: Joi.string().optional(),
   startTime: Joi.date().iso().optional(),
   endTime: Joi.date().iso().optional(),
   price: Joi.number().positive().optional(),
