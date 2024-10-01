@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Screen } from "../models";
+import mongoose from "mongoose";
 
 export const getAllScreens = async (
   _req: Request,
@@ -20,7 +21,22 @@ export const getScreenById = async (
   next: NextFunction
 ) => {
   try {
-    const screen = await Screen.findById(req.params.id);
+    const screen = await Screen.aggregate([
+      {
+        $lookup: {
+          from: "showtimes",
+          localField: "_id",
+          foreignField: "screenId",
+          as: "showtimes",
+        },
+      },
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.params.id),
+        },
+      },
+    ]);
+
     if (!screen) {
       return res.status(404).json({ message: "Screen not found" });
     }

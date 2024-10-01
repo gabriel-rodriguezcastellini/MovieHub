@@ -6,7 +6,7 @@ interface Showtime extends Document {
   price: number;
   movieId: string;
   screenId: string;
-  tickets: string[];
+  tickets: object[];
 }
 
 const ShowtimeSchema: Schema = new Schema(

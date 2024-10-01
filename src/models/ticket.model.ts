@@ -2,9 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 
 interface Ticket extends Document {
   showtimeId: string;
-  price: number;
-  seatNumber: string;
   userId: string;
+  seatNumber: string;
 }
 
 const TicketSchema: Schema = new Schema(
@@ -14,13 +13,12 @@ const TicketSchema: Schema = new Schema(
       ref: "Showtime",
       required: true,
     },
-    price: { type: Number, required: true },
-    seatNumber: { type: String, required: true },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
+    seatNumber: { type: String, required: true },
   },
   {
     timestamps: true,

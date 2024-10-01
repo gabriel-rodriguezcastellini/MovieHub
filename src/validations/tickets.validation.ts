@@ -2,19 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import Joi from "joi";
 
 const createTicketSchema = Joi.object({
-  movieId: Joi.string().required(),
-  userId: Joi.string().required(),
   seatNumber: Joi.string().required(),
-  showTime: Joi.date().required(),
-  price: Joi.number().required(),
+  showtimeId: Joi.string().required(),
 });
 
 const updateTicketSchema = Joi.object({
-  movieId: Joi.string().optional(),
-  userId: Joi.string().optional(),
   seatNumber: Joi.string().optional(),
-  showTime: Joi.date().optional(),
-  price: Joi.number().optional(),
+  showtimeId: Joi.string().optional(),
 });
 
 const deleteTicketSchema = Joi.object({

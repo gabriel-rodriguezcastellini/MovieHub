@@ -7,7 +7,7 @@ interface User extends Document {
   email: string;
   isAdmin: boolean;
   firebaseUid: string;
-  tickets: string[];
+  tickets: object[];
 }
 
 const UserSchema: Schema = new Schema(

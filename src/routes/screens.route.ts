@@ -9,12 +9,13 @@ import {
 } from "../controllers";
 
 import { validateCreateScreen, validateUpdateScreen } from "../validations";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 router.get("/", getAllScreens);
 router.get("/:id", getScreenById);
-router.post("/", validateCreateScreen, createScreen);
-router.patch("/:id", validateUpdateScreen, updateScreen);
-router.delete("/:id", deleteScreen);
+router.post("/", authMiddleware, validateCreateScreen, createScreen);
+router.patch("/:id", authMiddleware, validateUpdateScreen, updateScreen);
+router.delete("/:id", authMiddleware, deleteScreen);
 
 export default router;

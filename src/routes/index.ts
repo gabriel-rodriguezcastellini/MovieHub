@@ -10,6 +10,6 @@ router.use("/users", usersRouter);
 router.use("/movies", moviesrouter);
 router.use("/showtimes", showtimerouter);
 router.use("/screens", screensRouter);
-router.use("/tickers", ticketsRouter);
+router.use("/tickets", ticketsRouter);
 
 export default router;

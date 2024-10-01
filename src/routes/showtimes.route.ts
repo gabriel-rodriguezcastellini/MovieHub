@@ -13,12 +13,13 @@ import {
   validateDeleteShowtime,
   validateUpdateShowtime,
 } from "../validations";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 router.get("/", getAllShowtimes);
 router.get("/:id", getShowtimeById);
-router.post("/", validateCreateShowtime, createShowtime);
-router.patch("/:id", validateUpdateShowtime, updateShowtime);
-router.delete("/:id", validateDeleteShowtime, deleteShowtime);
+router.post("/", authMiddleware, validateCreateShowtime, createShowtime);
+router.patch("/:id", authMiddleware, validateUpdateShowtime, updateShowtime);
+router.delete("/:id", authMiddleware, validateDeleteShowtime, deleteShowtime);
 
 export default router;

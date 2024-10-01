@@ -13,12 +13,13 @@ import {
   deleteUserValidation,
   updatedUserValidation,
 } from "../validations";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
-router.get("/", getUsers);
+router.get("/", authMiddleware, getUsers);
 router.get("/:id", getUser);
 router.post("/", createUserValidation, createUser);
-router.patch("/:id", updatedUserValidation, updateUser);
-router.delete("/:id", deleteUserValidation, deleteUser);
+router.patch("/:id", authMiddleware, updatedUserValidation, updateUser);
+router.delete("/:id", authMiddleware, deleteUserValidation, deleteUser);
 
 export default router;

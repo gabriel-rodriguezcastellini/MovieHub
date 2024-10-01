@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Showtime } from "../models";
+import mongoose from "mongoose";
 
 export const getAllShowtimes = async (
   _req: Request,
@@ -20,7 +21,22 @@ export const getShowtimeById = async (
   next: NextFunction
 ) => {
   try {
-    const showtime = await Showtime.findById(req.params.id);
+    const showtime = await Showtime.aggregate([
+      {
+        $lookup: {
+          from: "tickets",
+          localField: "_id",
+          foreignField: "showtimeId",
+          as: "tickets",
+        },
+      },
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.params.id),
+        },
+      },
+    ]);
+
     if (!showtime) {
       return res.status(404).json({ message: "Showtime not found" });
     }

@@ -4,7 +4,7 @@ interface Screen extends Document {
   name: string;
   location: string;
   capacity: number;
-  showtimes: string[];
+  showtimes: object[];
 }
 
 const ScreenSchema: Schema = new Schema(

@@ -14,12 +14,13 @@ import {
   updateMovieValidation,
   getMovieValidation,
 } from "../validations";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const router = Router();
 router.get("/", getMovies);
 router.get("/:id", getMovieById, getMovieValidation);
-router.post("/", createMovieValidation, createMovie);
-router.patch("/:id", updateMovieValidation, updateMovie);
-router.delete("/:id", deleteMovieValidation, deleteMovie);
+router.post("/", authMiddleware, createMovieValidation, createMovie);
+router.patch("/:id", authMiddleware, updateMovieValidation, updateMovie);
+router.delete("/:id", authMiddleware, deleteMovieValidation, deleteMovie);
 
 export default router;
