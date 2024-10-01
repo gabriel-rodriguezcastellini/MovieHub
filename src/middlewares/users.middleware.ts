@@ -11,14 +11,17 @@ export const usersMiddleware = async (
 
     if (authHeader) {
       req.body.userId = (
-        await User.findOne({
-          firebaseUid: JSON.parse(
-            Buffer.from(
-              authHeader.split(" ")[1].split(".")[1],
-              "base64"
-            ).toString()
-          ).user_id,
-        })
+        await User.findOne(
+          {
+            firebaseUid: JSON.parse(
+              Buffer.from(
+                authHeader.split(" ")[1].split(".")[1],
+                "base64"
+              ).toString()
+            ).user_id,
+          },
+          { _id: 1 }
+        )
       )?.id;
     }
 
