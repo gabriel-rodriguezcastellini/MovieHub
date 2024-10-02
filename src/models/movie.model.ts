@@ -8,6 +8,7 @@ interface Movie extends Document {
   releaseDate: Date;
   duration: number;
   rating: string;
+  imageUrl: string;
   showtimes: object[];
 }
 
@@ -15,11 +16,12 @@ const MovieSchema: Schema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    genre: { Type: String },
-    director: { Type: String },
-    releaseDate: { Type: Date },
-    duration: { Type: Number },
-    rating: { Type: String },
+    genre: { type: String },
+    director: { type: String },
+    releaseDate: { type: Date },
+    duration: { type: Number },
+    rating: { type: String },
+    imageUrl: { type: String },
   },
   {
     timestamps: true,
