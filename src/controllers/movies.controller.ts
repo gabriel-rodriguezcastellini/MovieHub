@@ -38,7 +38,7 @@ export const getMovieById = async (
     if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
-    return res.status(200).json(movie);
+    return res.status(200).json(movie[0]);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching movie", error });
   }
