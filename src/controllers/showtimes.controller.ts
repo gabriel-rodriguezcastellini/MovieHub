@@ -3,12 +3,18 @@ import { Showtime } from "../models";
 import mongoose from "mongoose";
 
 export const getAllShowtimes = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const showtimes = await Showtime.find();
+    const { movieId } = req.query;
+    let showtimes;
+    if (movieId) {
+      showtimes = await Showtime.find({ movieId });
+    } else {
+      showtimes = await Showtime.find();
+    }
     res.status(200).json(showtimes);
   } catch (error) {
     next(error);
