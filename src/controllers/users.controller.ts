@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../models";
+import axios from "axios";
+import { User } from "../models/user.model";
 import firebaseApp from "../config/firebase";
 
 export const createUser = async (
@@ -101,5 +102,36 @@ export const deleteUser = async (
     return res.status(204).send();
   } catch (error) {
     next(error);
+  }
+};
+
+export const login = async (req: Request, res: Response) => {
+  try {
+    const firebaseLoginUrl = `${process.env.FIREBASE_LOGIN_URL}${process.env.FIREBASE_API_KEY}`;
+    interface FirebaseResponse {
+      idToken: string;
+      email: string;
+      refreshToken: string;
+      expiresIn: string;
+      localId: string;
+    }
+
+    const firebaseResponse = await axios.post<FirebaseResponse>(
+      firebaseLoginUrl,
+      {
+        email: req.body.email,
+        password: req.body.password,
+        returnSecureToken: true,
+      }
+    );
+
+    const { localId } = firebaseResponse.data;
+
+    const user = await User.findOne({ firebaseUid: localId });
+    if (!user) return res.status(400).send("Invalid email or password.");
+
+    res.send({ idToken: firebaseResponse.data.idToken });
+  } catch {
+    res.status(400).send("Invalid email or password.");
   }
 };
