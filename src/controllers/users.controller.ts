@@ -115,7 +115,6 @@ export const login = async (req: Request, res: Response) => {
       expiresIn: string;
       localId: string;
     }
-
     const firebaseResponse = await axios.post<FirebaseResponse>(
       firebaseLoginUrl,
       {
@@ -124,13 +123,16 @@ export const login = async (req: Request, res: Response) => {
         returnSecureToken: true,
       }
     );
-
     const { localId } = firebaseResponse.data;
 
     const user = await User.findOne({ firebaseUid: localId });
     if (!user) return res.status(400).send("Invalid email or password.");
 
-    res.send({ idToken: firebaseResponse.data.idToken });
+    const customToken = await firebaseApp.auth().createCustomToken(localId, {
+      isAdmin: user.isAdmin,
+    });
+
+    res.send({ idToken: customToken });
   } catch {
     res.status(400).send("Invalid email or password.");
   }
