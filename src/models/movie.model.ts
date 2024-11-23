@@ -10,6 +10,7 @@ interface Movie extends Document {
   rating: string;
   imageUrl: string;
   showtimes: object[];
+  isVisible: boolean;
 }
 
 const MovieSchema: Schema = new Schema(
@@ -22,6 +23,7 @@ const MovieSchema: Schema = new Schema(
     duration: { type: Number },
     rating: { type: String },
     imageUrl: { type: String },
+    isVisible: { type: Boolean, default: true },
   },
   {
     timestamps: true,

@@ -14,6 +14,18 @@ export const getMovies = async (
   }
 };
 
+export const getVisibleMovies = async (
+  _req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const movies = await Movie.find({ isVisible: true });
+    return res.status(200).json(movies);
+  } catch (error) {
+    return res.status(500).json({ message: "Error fetching movies", error });
+  }
+};
+
 export const getMovieById = async (
   req: Request,
   res: Response
@@ -35,10 +47,17 @@ export const getMovieById = async (
       },
     ]);
 
-    if (!movie) {
+    if (!movie || movie.length === 0) {
       return res.status(404).json({ message: "Movie not found" });
     }
-    return res.status(200).json(movie[0]);
+
+    const movieData = movie[0];
+
+    if (!movieData.isVisible && !req.headers.authorization) {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    return res.status(200).json(movieData);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching movie", error });
   }
