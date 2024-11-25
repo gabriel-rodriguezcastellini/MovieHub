@@ -47,6 +47,12 @@ export const updateMovieValidation = validate(
   })
 );
 
+export const updateMovieVisibilityValidation = validate(
+  Joi.object({
+    isVisible: Joi.boolean().required(),
+  })
+);
+
 export const getMovieValidation = validateParams(
   Joi.object({
     id: Joi.string().guid({ version: "uuidv4" }).required(),
