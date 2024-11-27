@@ -68,7 +68,8 @@ export const createMovie = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const newMovie = new Movie(req.body);
+    const { title, description, imageUrl } = req.body;
+    const newMovie = new Movie({ title, description, imageUrl });
     const savedMovie = await newMovie.save();
     return res.status(201).json(savedMovie);
   } catch (error) {

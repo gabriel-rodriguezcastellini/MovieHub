@@ -24,12 +24,7 @@ const validateParams = (schema: Joi.ObjectSchema) => {
 export const createMovieValidation = validate(
   Joi.object({
     title: Joi.string().min(1).max(255).required(),
-    director: Joi.string().min(1).max(255).required(),
-    releaseDate: Joi.date().required(),
-    genre: Joi.string().min(1).max(100).required(),
-    rating: Joi.number().min(0).max(10).required(),
     description: Joi.string().min(1).max(1000).required(),
-    duration: Joi.number().min(1).required(),
     imageUrl: Joi.string().uri().required(),
   })
 );
