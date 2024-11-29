@@ -82,15 +82,16 @@ export const updateMovie = async (
   res: Response
 ): Promise<Response> => {
   try {
+    const { title, description, imageUrl } = req.body;
     const updatedMovie = await Movie.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { title, description, imageUrl },
       { new: true }
     );
     if (!updatedMovie) {
       return res.status(404).json({ message: "Movie not found" });
     }
-    return res.status(204).send();
+    return res.status(200).json(updatedMovie);
   } catch (error) {
     return res.status(500).json({ message: "Error updating movie", error });
   }
@@ -124,7 +125,7 @@ export const deleteMovie = async (
     if (!deletedMovie) {
       return res.status(404).json({ message: "Movie not found" });
     }
-    return res.status(200).json({ message: "Movie deleted successfully" });
+    return res.status(204).send();
   } catch (error) {
     return res.status(500).json({ message: "Error deleting movie", error });
   }
