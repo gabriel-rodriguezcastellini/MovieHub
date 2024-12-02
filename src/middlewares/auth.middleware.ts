@@ -25,8 +25,6 @@ export const authMiddleware = async (
     next();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    console.log(error.errorInfo.code);
-
     if (error.errorInfo.code === "auth/argument-error") {
       next("Provide a token");
     }

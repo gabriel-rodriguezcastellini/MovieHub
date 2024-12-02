@@ -26,14 +26,16 @@ export const createMovieValidation = validate(
     title: Joi.string().min(1).max(255).required(),
     description: Joi.string().min(1).max(1000).required(),
     imageUrl: Joi.string().uri().required(),
+    isVisible: Joi.boolean().required(),
   })
 );
 
 export const updateMovieValidation = validate(
   Joi.object({
-    title: Joi.string().min(1).max(255),
+    title: Joi.string().min(1).max(255).required(),
     description: Joi.string().min(1).max(1000).required(),
-    imageUrl: Joi.string().uri(),
+    imageUrl: Joi.string().uri().required(),
+    isVisible: Joi.boolean().required(),
   })
 );
 

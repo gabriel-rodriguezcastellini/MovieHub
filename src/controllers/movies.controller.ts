@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Movie } from "../models";
-import mongoose from "mongoose";
 
 export const getMovies = async (
   _req: Request,
@@ -31,33 +30,19 @@ export const getMovieById = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const movie = await Movie.aggregate([
-      {
-        $lookup: {
-          from: "showtimes",
-          localField: "_id",
-          foreignField: "movieId",
-          as: "showtimes",
-        },
-      },
-      {
-        $match: {
-          _id: new mongoose.Types.ObjectId(req.params.id),
-        },
-      },
-    ]);
+    const movie = await Movie.findById(req.params.id)
+      .select("_id title description imageUrl isVisible")
+      .lean();
 
-    if (!movie || movie.length === 0) {
+    if (!movie) {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    const movieData = movie[0];
-
-    if (!movieData.isVisible && !req.headers.authorization) {
+    if (!movie.isVisible && !req.headers.authorization) {
       return res.status(403).json({ message: "Access denied" });
     }
 
-    return res.status(200).json(movieData);
+    return res.status(200).json(movie);
   } catch (error) {
     return res.status(500).json({ message: "Error fetching movie", error });
   }
@@ -68,8 +53,16 @@ export const createMovie = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { title, description, imageUrl } = req.body;
-    const newMovie = new Movie({ title, description, imageUrl });
+    const { title, description, imageUrl, isVisible } = req.body;
+
+    const existingMovie = await Movie.findOne({ title });
+    if (existingMovie) {
+      return res
+        .status(400)
+        .json({ message: "Movie with this title already exists" });
+    }
+
+    const newMovie = new Movie({ title, description, imageUrl, isVisible });
     const savedMovie = await newMovie.save();
     return res.status(201).json(savedMovie);
   } catch (error) {
@@ -82,10 +75,21 @@ export const updateMovie = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { title, description, imageUrl } = req.body;
+    const { title, description, imageUrl, isVisible } = req.body;
+
+    const existingMovie = await Movie.findOne({ title });
+    if (
+      existingMovie &&
+      (existingMovie as { _id: string })._id.toString() !== req.params.id
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Movie with this title already exists" });
+    }
+
     const updatedMovie = await Movie.findByIdAndUpdate(
       req.params.id,
-      { title, description, imageUrl },
+      { title, description, imageUrl, isVisible },
       { new: true }
     );
     if (!updatedMovie) {
