@@ -10,14 +10,19 @@ const port = process.env.PORT || 4000;
 
 connectDB();
 
-app.use(cors());
-app.use(json());
-app.use(router);
+try {
+  console.log("iniciando cors");
+  app.use(cors());
+  app.use(json());
+  app.use(router);
 
-app.use((_req: Request, res: Response) => {
-  res.status(404).send("Route not found");
-});
+  app.use((_req: Request, res: Response) => {
+    res.status(404).send("Route not found");
+  });
 
-app.listen(port);
+  app.listen(port);
 
-module.exports = app;
+  module.exports = app;
+} catch (error) {
+  console.log("error: " + error);
+}
