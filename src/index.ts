@@ -18,6 +18,8 @@ app.use((_req: Request, res: Response) => {
   res.status(404).send("Route not found");
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
 
 module.exports = app;
