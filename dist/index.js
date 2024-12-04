@@ -45,20 +45,11 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 (0, database_1.default)();
-try {
-    console.log("iniciando cors");
-    app.use((0, cors_1.default)());
-    app.use((0, express_1.json)());
-    app.use(index_1.default);
-    app.use((_req, res) => {
-        res.status(404).send("Route not found");
-    });
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
-    module.exports = app;
-    console.log("modules exported");
-}
-catch (error) {
-    console.log("error: " + error);
-}
+app.use((0, cors_1.default)());
+app.use((0, express_1.json)());
+app.use(index_1.default);
+app.use((_req, res) => {
+    res.status(404).send("Route not found");
+});
+app.listen(port);
+module.exports = app;
