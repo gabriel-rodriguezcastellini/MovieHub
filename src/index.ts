@@ -4,16 +4,11 @@ import router from "./routes/index";
 import connectDB from "./database";
 import dotenv from "dotenv";
 
-console.log("running");
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
 connectDB();
-
-app.use("/", (req, res) => {
-  res.send("Hello World");
-});
 
 app.use(cors());
 app.use(json());
