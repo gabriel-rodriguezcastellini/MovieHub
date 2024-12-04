@@ -4,6 +4,7 @@ import router from "./routes/index";
 import connectDB from "./database";
 import dotenv from "dotenv";
 
+console.log("running");
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
